@@ -8,6 +8,7 @@
 #include <fstream>
 #include "bladerf.h"
 #include "limesdr.h"
+#include "usrp.h"
 #include "dsp/sink/null_sink.h"
 #include <stddef.h>
 #include "tun.h"
@@ -55,7 +56,8 @@ int main() {
     // Initialize the SDR
     flog::info("Initialising the SDR...");
     //BladeRF sdr(&agc.out, SDR_SAMPLERATE, RX_FREQ, TX_FREQ);
-    LimeSDR sdr(&agc.out, SDR_SAMPLERATE, RX_FREQ, TX_FREQ);
+    // LimeSDR sdr(&agc.out, SDR_SAMPLERATE, RX_FREQ, TX_FREQ);
+    USRP sdr(&agc.out, SDR_SAMPLERATE, RX_FREQ, TX_FREQ);
 
     // Intialize the RX DSP
     flog::info("Initialising the receiver...");

@@ -13,6 +13,11 @@ add_subdirectory("libcorrect/")
 target_include_directories(${PROJECT_NAME} PUBLIC "libcorrect/include")
 target_link_libraries(${PROJECT_NAME} PUBLIC correct_static)
 
+# Find UHD package
+find_package(UHD REQUIRED)
+target_include_directories(${PROJECT_NAME} PRIVATE ${UHD_INCLUDE_DIRS})
+target_link_libraries(${PROJECT_NAME} PRIVATE ${UHD_LIBRARIES})
+
 if (MSVC)
     # Lib path
     target_link_directories(${PROJECT_NAME} PRIVATE "C:/Program Files/PothosSDR/lib/")
@@ -27,7 +32,7 @@ if (MSVC)
     find_package(FFTW3f CONFIG REQUIRED)
     target_link_libraries(${PROJECT_NAME} PRIVATE FFTW3::fftw3f)
 else()
-    find_package(PkgConfig)
+    find_package(PkgConfig REQUIRED)
 
     pkg_check_modules(FFTW3 REQUIRED fftw3f)
     pkg_check_modules(VOLK REQUIRED volk)
